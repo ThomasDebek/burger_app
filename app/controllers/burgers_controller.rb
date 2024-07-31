@@ -57,6 +57,23 @@ class BurgersController < ApplicationController
     end
   end
 
+
+
+  def apply_promo
+    @burger = Burger.find(params[:id])
+    @promotion = Promotion.find_by(code: params[:promo_code], active: true)
+
+    if @promotion
+      @discounted_price = @burger.price - @promotion.discount
+      flash[:notice] = "Kod promocyjny zastosowany! Nowa cena to #{@discounted_price}"
+    else
+      flash[:alert] = "Nieprawidłowy kod promocyjny"
+    end
+
+    render :show
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_burger

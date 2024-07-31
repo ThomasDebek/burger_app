@@ -2,6 +2,21 @@
 
 <%= render @burger %>
 
+
+
+
+<%= form_with url: apply_promo_burger_path(@burger), method: :post, local: true do %>
+  <div class="field">
+    <%= label_tag :promo_code, "Kod promocyjny" %>
+    <%= text_field_tag :promo_code %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Zastosuj kod" %>
+  </div>
+<% end %>
+
+
+
 <div>
   <%= link_to "Edit this burger", edit_burger_path(@burger) %> |
   <%= link_to "Back to burgers", burgers_path %>
